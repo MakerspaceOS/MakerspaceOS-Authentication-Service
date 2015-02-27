@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MakerSpaceOS.Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Equipment">
+    <Key>
+      <PropertyRef Name="EquipmentID" />
+    </Key>
+    <Property Name="EquipmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EquipmentSiteUniqueID" Type="varchar" MaxLength="10" />
+    <Property Name="EquipmentName" Type="nvarchar" MaxLength="50" />
+    <Property Name="EquipmentTypeID" Type="int" />
+    <Property Name="RequiresTrainingCourse" Type="bit" Nullable="false" />
+    <Property Name="TimeLimitMinutes" Type="int" Nullable="false" />
+    <Property Name="AmpsWhenOn" Type="int" />
+  </EntityType>
+  <EntityType Name="EquipmentTrainingCourse">
+    <Key>
+      <PropertyRef Name="EquipmentID" />
+      <PropertyRef Name="TrainingCourseID" />
+    </Key>
+    <Property Name="EquipmentID" Type="int" Nullable="false" />
+    <Property Name="TrainingCourseID" Type="int" Nullable="false" />
+    <Property Name="RequiredForUse" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EquipmentType">
+    <Key>
+      <PropertyRef Name="EquipmentTypeID" />
+    </Key>
+    <Property Name="EquipmentTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EquipmentTypeName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Members">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="JoinDate" Type="date" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="MembersTrainingCourse">
+    <Key>
+      <PropertyRef Name="TrainingCourseID" />
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="TrainingCourseID" Type="int" Nullable="false" />
+    <Property Name="MemberID" Type="int" Nullable="false" />
+    <Property Name="PassedCourse" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RFIDTags">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RFIDCode" Type="nchar" MaxLength="10" />
+    <Property Name="PIN" Type="nvarchar" MaxLength="4" />
+    <Property Name="MemberID" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TrainingCourse">
+    <Key>
+      <PropertyRef Name="TrainingCourseID" />
+    </Key>
+    <Property Name="TrainingCourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TrainingCourseName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Equipment_EquipmentType">
+    <End Role="EquipmentType" Type="Self.EquipmentType" Multiplicity="0..1" />
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EquipmentType">
+        <PropertyRef Name="EquipmentTypeID" />
+      </Principal>
+      <Dependent Role="Equipment">
+        <PropertyRef Name="EquipmentTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EquipmentTrainingCourse_Equipment">
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+    <End Role="EquipmentTrainingCourse" Type="Self.EquipmentTrainingCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="EquipmentID" />
+      </Principal>
+      <Dependent Role="EquipmentTrainingCourse">
+        <PropertyRef Name="EquipmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EquipmentTrainingCourse_TrainingCourse">
+    <End Role="TrainingCourse" Type="Self.TrainingCourse" Multiplicity="1" />
+    <End Role="EquipmentTrainingCourse" Type="Self.EquipmentTrainingCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrainingCourse">
+        <PropertyRef Name="TrainingCourseID" />
+      </Principal>
+      <Dependent Role="EquipmentTrainingCourse">
+        <PropertyRef Name="TrainingCourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MembersTrainingCourse_Members">
+    <End Role="Members" Type="Self.Members" Multiplicity="1" />
+    <End Role="MembersTrainingCourse" Type="Self.MembersTrainingCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="MembersTrainingCourse">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MembersTrainingCourse_TrainingCourse">
+    <End Role="TrainingCourse" Type="Self.TrainingCourse" Multiplicity="1" />
+    <End Role="MembersTrainingCourse" Type="Self.MembersTrainingCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrainingCourse">
+        <PropertyRef Name="TrainingCourseID" />
+      </Principal>
+      <Dependent Role="MembersTrainingCourse">
+        <PropertyRef Name="TrainingCourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RFIDTags_Members">
+    <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
+    <End Role="RFIDTags" Type="Self.RFIDTags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="RFIDTags">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MakerSpaceOSDataStoreContainer">
+    <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EquipmentTrainingCourse" EntityType="Self.EquipmentTrainingCourse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EquipmentType" EntityType="Self.EquipmentType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MembersTrainingCourse" EntityType="Self.MembersTrainingCourse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RFIDTags" EntityType="Self.RFIDTags" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TrainingCourse" EntityType="Self.TrainingCourse" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Equipment_EquipmentType" Association="Self.FK_Equipment_EquipmentType">
+      <End Role="EquipmentType" EntitySet="EquipmentType" />
+      <End Role="Equipment" EntitySet="Equipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EquipmentTrainingCourse_Equipment" Association="Self.FK_EquipmentTrainingCourse_Equipment">
+      <End Role="Equipment" EntitySet="Equipment" />
+      <End Role="EquipmentTrainingCourse" EntitySet="EquipmentTrainingCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EquipmentTrainingCourse_TrainingCourse" Association="Self.FK_EquipmentTrainingCourse_TrainingCourse">
+      <End Role="TrainingCourse" EntitySet="TrainingCourse" />
+      <End Role="EquipmentTrainingCourse" EntitySet="EquipmentTrainingCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MembersTrainingCourse_Members" Association="Self.FK_MembersTrainingCourse_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="MembersTrainingCourse" EntitySet="MembersTrainingCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MembersTrainingCourse_TrainingCourse" Association="Self.FK_MembersTrainingCourse_TrainingCourse">
+      <End Role="TrainingCourse" EntitySet="TrainingCourse" />
+      <End Role="MembersTrainingCourse" EntitySet="MembersTrainingCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RFIDTags_Members" Association="Self.FK_RFIDTags_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="RFIDTags" EntitySet="RFIDTags" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

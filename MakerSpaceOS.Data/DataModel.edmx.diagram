@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1e7aec302d7f40c9afd0d2c0ac9813f0" Name="Diagram1">
+        <EntityTypeShape EntityType="MakerSpaceOS.Data.RFIDTag" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakerSpaceOS.Data.Equipment" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="MakerSpaceOS.Data.EquipmentTrainingCourse" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="MakerSpaceOS.Data.EquipmentType" Width="1.5" PointX="1.5" PointY="10.5" />
+        <EntityTypeShape EntityType="MakerSpaceOS.Data.Member" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MakerSpaceOS.Data.MembersTrainingCourse" Width="1.5" PointX="3" PointY="4" />
+        <EntityTypeShape EntityType="MakerSpaceOS.Data.sysdiagram" Width="1.5" PointX="5.75" PointY="2.375" />
+        <EntityTypeShape EntityType="MakerSpaceOS.Data.TrainingCourse" Width="1.5" PointX="0.75" PointY="4.125" />
+        <AssociationConnector Association="MakerSpaceOS.Data.FK_Equipment_EquipmentType" />
+        <AssociationConnector Association="MakerSpaceOS.Data.FK_EquipmentTrainingCourse_Equipment" />
+        <AssociationConnector Association="MakerSpaceOS.Data.FK_EquipmentTrainingCourse_TrainingCourse" />
+        <AssociationConnector Association="MakerSpaceOS.Data.FK_MembersTrainingCourse_Members" />
+        <AssociationConnector Association="MakerSpaceOS.Data.FK_RFIDTags_Members" />
+        <AssociationConnector Association="MakerSpaceOS.Data.FK_MembersTrainingCourse_TrainingCourse" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

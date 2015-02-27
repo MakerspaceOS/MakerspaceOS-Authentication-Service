@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MakerSpaceOS.Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="RFIDTag">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RFIDCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PIN" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="MemberID" Type="Int32" />
+    <NavigationProperty Name="Member" Relationship="MakerSpaceOS.Data.FK_RFIDTags_Members" FromRole="RFIDTag" ToRole="Member" />
+  </EntityType>
+  <EntityContainer Name="MakerSpaceOSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="RFIDTags" EntityType="Self.RFIDTag" />
+    <EntitySet Name="Equipments" EntityType="MakerSpaceOS.Data.Equipment" />
+    <EntitySet Name="EquipmentTrainingCourses" EntityType="MakerSpaceOS.Data.EquipmentTrainingCourse" />
+    <EntitySet Name="EquipmentTypes" EntityType="MakerSpaceOS.Data.EquipmentType" />
+    <EntitySet Name="Members" EntityType="MakerSpaceOS.Data.Member" />
+    <EntitySet Name="MembersTrainingCourses" EntityType="MakerSpaceOS.Data.MembersTrainingCourse" />
+    <EntitySet Name="sysdiagrams" EntityType="MakerSpaceOS.Data.sysdiagram" />
+    <EntitySet Name="TrainingCourses" EntityType="MakerSpaceOS.Data.TrainingCourse" />
+    <AssociationSet Name="FK_Equipment_EquipmentType" Association="MakerSpaceOS.Data.FK_Equipment_EquipmentType">
+      <End Role="EquipmentType" EntitySet="EquipmentTypes" />
+      <End Role="Equipment" EntitySet="Equipments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EquipmentTrainingCourse_Equipment" Association="MakerSpaceOS.Data.FK_EquipmentTrainingCourse_Equipment">
+      <End Role="Equipment" EntitySet="Equipments" />
+      <End Role="EquipmentTrainingCourse" EntitySet="EquipmentTrainingCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EquipmentTrainingCourse_TrainingCourse" Association="MakerSpaceOS.Data.FK_EquipmentTrainingCourse_TrainingCourse">
+      <End Role="TrainingCourse" EntitySet="TrainingCourses" />
+      <End Role="EquipmentTrainingCourse" EntitySet="EquipmentTrainingCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MembersTrainingCourse_Members" Association="MakerSpaceOS.Data.FK_MembersTrainingCourse_Members">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="MembersTrainingCourse" EntitySet="MembersTrainingCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RFIDTags_Members" Association="MakerSpaceOS.Data.FK_RFIDTags_Members">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="RFIDTag" EntitySet="RFIDTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MembersTrainingCourse_TrainingCourse" Association="MakerSpaceOS.Data.FK_MembersTrainingCourse_TrainingCourse">
+      <End Role="TrainingCourse" EntitySet="TrainingCourses" />
+      <End Role="MembersTrainingCourse" EntitySet="MembersTrainingCourses" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Equipment">
+    <Key>
+      <PropertyRef Name="EquipmentID" />
+    </Key>
+    <Property Name="EquipmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EquipmentSiteUniqueID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="EquipmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EquipmentTypeID" Type="Int32" />
+    <Property Name="RequiresTrainingCourse" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="EquipmentType" Relationship="MakerSpaceOS.Data.FK_Equipment_EquipmentType" FromRole="Equipment" ToRole="EquipmentType" />
+    <NavigationProperty Name="EquipmentTrainingCourses" Relationship="MakerSpaceOS.Data.FK_EquipmentTrainingCourse_Equipment" FromRole="Equipment" ToRole="EquipmentTrainingCourse" />
+    <Property Name="TimeLimitMinutes" Type="Int32" Nullable="false" />
+    <Property Name="AmpsWhenOn" Type="Int32" />
+  </EntityType>
+  <EntityType Name="EquipmentTrainingCourse">
+    <Key>
+      <PropertyRef Name="EquipmentID" />
+      <PropertyRef Name="TrainingCourseID" />
+    </Key>
+    <Property Name="EquipmentID" Type="Int32" Nullable="false" />
+    <Property Name="TrainingCourseID" Type="Int32" Nullable="false" />
+    <Property Name="RequiredForUse" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Equipment" Relationship="MakerSpaceOS.Data.FK_EquipmentTrainingCourse_Equipment" FromRole="EquipmentTrainingCourse" ToRole="Equipment" />
+    <NavigationProperty Name="TrainingCourse" Relationship="MakerSpaceOS.Data.FK_EquipmentTrainingCourse_TrainingCourse" FromRole="EquipmentTrainingCourse" ToRole="TrainingCourse" />
+  </EntityType>
+  <EntityType Name="EquipmentType">
+    <Key>
+      <PropertyRef Name="EquipmentTypeID" />
+    </Key>
+    <Property Name="EquipmentTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EquipmentTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Equipments" Relationship="MakerSpaceOS.Data.FK_Equipment_EquipmentType" FromRole="EquipmentType" ToRole="Equipment" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="JoinDate" Type="DateTime" Precision="0" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="MembersTrainingCourses" Relationship="MakerSpaceOS.Data.FK_MembersTrainingCourse_Members" FromRole="Member" ToRole="MembersTrainingCourse" />
+    <NavigationProperty Name="RFIDTags" Relationship="MakerSpaceOS.Data.FK_RFIDTags_Members" FromRole="Member" ToRole="RFIDTag" />
+  </EntityType>
+  <EntityType Name="MembersTrainingCourse">
+    <Key>
+      <PropertyRef Name="TrainingCourseID" />
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="TrainingCourseID" Type="Int32" Nullable="false" />
+    <Property Name="MemberID" Type="Int32" Nullable="false" />
+    <Property Name="PassedCourse" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Member" Relationship="MakerSpaceOS.Data.FK_MembersTrainingCourse_Members" FromRole="MembersTrainingCourse" ToRole="Member" />
+    <NavigationProperty Name="TrainingCourse" Relationship="MakerSpaceOS.Data.FK_MembersTrainingCourse_TrainingCourse" FromRole="MembersTrainingCourse" ToRole="TrainingCourse" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TrainingCourse">
+    <Key>
+      <PropertyRef Name="TrainingCourseID" />
+    </Key>
+    <Property Name="TrainingCourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TrainingCourseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="EquipmentTrainingCourses" Relationship="MakerSpaceOS.Data.FK_EquipmentTrainingCourse_TrainingCourse" FromRole="TrainingCourse" ToRole="EquipmentTrainingCourse" />
+    <NavigationProperty Name="MembersTrainingCourses" Relationship="MakerSpaceOS.Data.FK_MembersTrainingCourse_TrainingCourse" FromRole="TrainingCourse" ToRole="MembersTrainingCourse" />
+  </EntityType>
+  <Association Name="FK_Equipment_EquipmentType">
+    <End Type="MakerSpaceOS.Data.EquipmentType" Role="EquipmentType" Multiplicity="0..1" />
+    <End Type="MakerSpaceOS.Data.Equipment" Role="Equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EquipmentType">
+        <PropertyRef Name="EquipmentTypeID" />
+      </Principal>
+      <Dependent Role="Equipment">
+        <PropertyRef Name="EquipmentTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EquipmentTrainingCourse_Equipment">
+    <End Type="MakerSpaceOS.Data.Equipment" Role="Equipment" Multiplicity="1" />
+    <End Type="MakerSpaceOS.Data.EquipmentTrainingCourse" Role="EquipmentTrainingCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="EquipmentID" />
+      </Principal>
+      <Dependent Role="EquipmentTrainingCourse">
+        <PropertyRef Name="EquipmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EquipmentTrainingCourse_TrainingCourse">
+    <End Type="MakerSpaceOS.Data.TrainingCourse" Role="TrainingCourse" Multiplicity="1" />
+    <End Type="MakerSpaceOS.Data.EquipmentTrainingCourse" Role="EquipmentTrainingCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrainingCourse">
+        <PropertyRef Name="TrainingCourseID" />
+      </Principal>
+      <Dependent Role="EquipmentTrainingCourse">
+        <PropertyRef Name="TrainingCourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MembersTrainingCourse_Members">
+    <End Type="MakerSpaceOS.Data.Member" Role="Member" Multiplicity="1" />
+    <End Type="MakerSpaceOS.Data.MembersTrainingCourse" Role="MembersTrainingCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="MembersTrainingCourse">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RFIDTags_Members">
+    <End Type="MakerSpaceOS.Data.Member" Role="Member" Multiplicity="0..1" />
+    <End Type="MakerSpaceOS.Data.RFIDTag" Role="RFIDTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="RFIDTag">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MembersTrainingCourse_TrainingCourse">
+    <End Type="MakerSpaceOS.Data.TrainingCourse" Role="TrainingCourse" Multiplicity="1" />
+    <End Type="MakerSpaceOS.Data.MembersTrainingCourse" Role="MembersTrainingCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrainingCourse">
+        <PropertyRef Name="TrainingCourseID" />
+      </Principal>
+      <Dependent Role="MembersTrainingCourse">
+        <PropertyRef Name="TrainingCourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

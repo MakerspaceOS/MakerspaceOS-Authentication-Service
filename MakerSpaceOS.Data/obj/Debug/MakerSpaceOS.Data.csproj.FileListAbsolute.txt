@@ -1,0 +1,10 @@
+C:\Users\Brad.Hess\Documents\Visual Studio 2013\Projects\MakerServices\MakerSpaceOS.Services\MakerSpaceOS.Data\bin\Debug\MakerSpaceOS.Data.dll.config
+C:\Users\Brad.Hess\Documents\Visual Studio 2013\Projects\MakerServices\MakerSpaceOS.Services\MakerSpaceOS.Data\bin\Debug\MakerSpaceOS.Data.dll
+C:\Users\Brad.Hess\Documents\Visual Studio 2013\Projects\MakerServices\MakerSpaceOS.Services\MakerSpaceOS.Data\bin\Debug\MakerSpaceOS.Data.pdb
+C:\Users\Brad.Hess\Documents\Visual Studio 2013\Projects\MakerServices\MakerSpaceOS.Services\MakerSpaceOS.Data\bin\Debug\EntityFramework.dll
+C:\Users\Brad.Hess\Documents\Visual Studio 2013\Projects\MakerServices\MakerSpaceOS.Services\MakerSpaceOS.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Brad.Hess\Documents\Visual Studio 2013\Projects\MakerServices\MakerSpaceOS.Services\MakerSpaceOS.Data\bin\Debug\EntityFramework.xml
+C:\Users\Brad.Hess\Documents\Visual Studio 2013\Projects\MakerServices\MakerSpaceOS.Services\MakerSpaceOS.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Brad.Hess\Documents\Visual Studio 2013\Projects\MakerServices\MakerSpaceOS.Services\MakerSpaceOS.Data\obj\Debug\MakerSpaceOS.Data.dll
+C:\Users\Brad.Hess\Documents\Visual Studio 2013\Projects\MakerServices\MakerSpaceOS.Services\MakerSpaceOS.Data\obj\Debug\MakerSpaceOS.Data.pdb
+C:\Users\Brad.Hess\Documents\Visual Studio 2013\Projects\MakerServices\MakerSpaceOS.Services\MakerSpaceOS.Data\obj\Debug\MakerSpaceOS.Data.csprojResolveAssemblyReference.cache

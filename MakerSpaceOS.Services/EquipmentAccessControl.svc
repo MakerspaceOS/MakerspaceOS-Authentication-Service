@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="MakerSpaceOS.Services.EquipmentAccessControl" CodeBehind="EquipmentAccessControl.svc.cs" %>

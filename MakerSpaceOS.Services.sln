@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakerSpaceOS.Services", "MakerSpaceOS.Services\MakerSpaceOS.Services.csproj", "{AE797BDF-2F33-4C94-A059-CCAD8ADEE208}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakerSpaceOS.Data", "MakerSpaceOS.Data\MakerSpaceOS.Data.csproj", "{90EBB94F-37CC-4254-BC3A-7E88D6E4FC5C}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MakerSpaceOS.Database", "MakerSpaceOS.Database\MakerSpaceOS.Database.sqlproj", "{BE5A84F6-1A2B-4CDE-98AF-B8F4C88029A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE797BDF-2F33-4C94-A059-CCAD8ADEE208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE797BDF-2F33-4C94-A059-CCAD8ADEE208}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE797BDF-2F33-4C94-A059-CCAD8ADEE208}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE797BDF-2F33-4C94-A059-CCAD8ADEE208}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90EBB94F-37CC-4254-BC3A-7E88D6E4FC5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90EBB94F-37CC-4254-BC3A-7E88D6E4FC5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90EBB94F-37CC-4254-BC3A-7E88D6E4FC5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90EBB94F-37CC-4254-BC3A-7E88D6E4FC5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE5A84F6-1A2B-4CDE-98AF-B8F4C88029A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE5A84F6-1A2B-4CDE-98AF-B8F4C88029A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE5A84F6-1A2B-4CDE-98AF-B8F4C88029A4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BE5A84F6-1A2B-4CDE-98AF-B8F4C88029A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE5A84F6-1A2B-4CDE-98AF-B8F4C88029A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE5A84F6-1A2B-4CDE-98AF-B8F4C88029A4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
